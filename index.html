@@ -23,6 +23,7 @@
             box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
             max-width: 90vw;
             margin: 20px;
+            border-radius: 12px;
         }
         
         .phone-image {
@@ -32,16 +33,29 @@
             border: none;
             box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
             transition: transform 0.3s ease;
+            border-radius: 8px;
         }
         
         .phone-image:hover {
             transform: scale(1.05);
+        }
+
+        .text-tag {
+            margin-top: 20px;
+            font-size: 1.2em;
+            color: #555;
+            transition: color 0.3s ease;
+        }
+
+        .text-tag:hover {
+            color: #000;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <img src="louie.jpg" alt="Phone Image" class="phone-image">
+        <div class="text-tag">Don't worry, I'll get there after you</div>
     </div>
 </body>
 </html>
