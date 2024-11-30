@@ -1,0 +1,254 @@
+:root {
+    --tab-selected-color: rgb(43, 50, 75);
+    --sidebar-color: rgb(43, 50, 75);
+    --tab-text-color: rgb(111, 179, 129);
+    --numbers-sidebar-color: rgb(67, 78, 119);
+    --tab-unselected-color: rgb(33, 38, 55);
+    --body-bg-color: rgb(38, 44, 65);
+    --heading1-color: rgb(227, 86, 55);
+    --text-body-color: rgb(248, 197, 87);
+    --italic-text-color: rgb(112, 124, 168);
+    --background-color: #f0f0f0;
+    --window-bar-bg-color: rgb(33, 38, 55);
+    --window-bar-height: 36px;
+    --button-unhighlighted-color: rgb(70, 75, 90);
+    --button-highlighted-color: rgb(128, 132, 142);
+    --divider-color: rgb(28, 32, 46);
+    --tab-hover-color: rgb(48, 56, 85);
+    --tab-divider-color-selected: rgb(43, 50, 75); /* Color for dividers between selected tabs */
+    --tab-divider-color-unselected: rgb(33, 38, 55); /* Color for dividers between unselected tabs */
+}
+
+/* Base Styling */
+body {
+    background-color: var(--background-color);
+    font-family: 'Fira Code', monospace;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.page-background {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+}
+
+.mac-window {
+    width: 95%;
+    /* max-width: 1200px; */
+    height: 95%;
+    /* max-height: 800px; */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    background-color: var(--body-bg-color);
+    position: relative;
+}
+
+.window-bar {
+    height: var(--window-bar-height);
+    background-color: var(--window-bar-bg-color);
+    display: flex;
+    align-items: center;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.window-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.window-buttons div {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.close {
+    background-color: #ff605c;
+}
+
+.minimize {
+    background-color: #ffbd44;
+}
+
+.maximize {
+    background-color: #00ca4e;
+}
+
+.window-title {
+    margin-left: auto;
+    margin-right: auto;
+    color: #e0e0e0;
+    font-size: 14px;
+}
+
+/* Styling for the Navigation Tabs */
+.tab-header {
+    background-color: var(--window-bar-bg-color);
+    display: flex;
+    align-items: center;
+    height: 36px;
+    box-sizing: border-box;
+    border-bottom: 1px solid var(--tab-unselected-color); /* Bottom divider now 1px */
+    position: relative;
+}
+
+.tab {
+    padding: 8px 12px;
+    margin-right: 0;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 13px; /* Slightly smaller font size */
+    color: var(--text-body-color);
+    transition: background-color 0.3s ease;
+    border-right: 1px solid var(--tab-divider-color-selected); /* Divider between unselected tabs */
+}
+
+.tab.selected {
+    background-color: var(--tab-selected-color);
+    color: var(--tab-text-color);
+    border-right: 1px solid var(--tab-divider-color-unselected); /* Divider between selected tabs (lighter color) */
+}
+
+.tab:hover {
+    background-color: var(--tab-hover-color);
+}
+
+.tab-close {
+    margin-left: 10px;
+    color: #b0b0b0; /* Light gray color for 'X' button */
+    font-weight: bold;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.tab-close:hover {
+    color: #ffffff; /* White color on hover */
+}
+
+/* Editor Wrapper and Content */
+.editor-wrapper {
+    display: flex;
+    flex-grow: 1;
+    overflow: hidden;
+    flex-direction: row;
+}
+
+.extensions-sidebar {
+    background-color: var(--tab-unselected-color);
+    width: 60px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    box-sizing: border-box;
+    align-items: center;
+    position: relative;
+}
+
+.extension-link {
+    position: relative;
+    height: 50px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.extension-link:hover::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 2px;
+    left: 0;
+    background-color: var(--button-highlighted-color);
+}
+
+.extension-icon {
+    width: 30px; 
+    height: 30px;
+    stroke:var(--window-bar-bg-color);
+    color: var(--button-unhighlighted-color); /* Set initial color */
+    transition: color 0.3s ease, fill 0.3s ease;
+}
+
+.extension-link:hover .extension-icon {
+    color: var(--button-highlighted-color); /* Change color on hover */
+    fill: var(--button-highlighted-color);
+}
+
+/* Divider between extension sidebar and line count sidebar */
+.divider {
+    width: 1px;
+    background-color: var(--divider-color);
+    height: 100%;
+}
+
+.content-area {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    overflow: hidden;
+}
+
+.editor-content {
+    display: flex;
+    flex-grow: 1;
+}
+
+.sidebar {
+    background-color: var(--sidebar-color);
+    padding: 10px;
+    width: 75px;
+    color: var(--numbers-sidebar-color);
+    text-align: center;
+    box-sizing: border-box;
+    overflow-y: auto;
+}
+
+.sidebar ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar ul li {
+    padding: 8px 0;
+    font-size: 14px;
+}
+
+/* Main Content */
+main {
+    background-color: var(--body-bg-color);
+    padding: 20px;
+    flex-grow: 1;
+    overflow-y: auto;
+    color: var(--text-body-color);
+    box-sizing: border-box;
+}
+
+h1 {
+    color: var(--heading1-color);
+}
+
+p {
+    color: var(--text-body-color);
+}
+
+footer {
+    color: var(--text-body-color);
+    margin-top: 10px;
+    font-size: 12px;
+}
