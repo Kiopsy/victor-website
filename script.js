@@ -1,28 +1,38 @@
-// script.js
-
 document.addEventListener("DOMContentLoaded", () => {
-    const blogMarkdownPath = 'blog-post.md'; // Example markdown file for the blog
-    const projectMarkdownPath = 'project-description.md'; // Example markdown file for the project
+    const tabs = document.querySelectorAll(".tab");
+    tabs.forEach((tab) => {
+        tab.addEventListener("click", function () {
+            setActiveTab(tab);
+        });
+    });
 
-    // Function to load and convert markdown
-    function loadMarkdown(filePath, targetElementId) {
-        fetch(filePath)
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(markdown => {
-                const targetElement = document.getElementById(targetElementId);
-                targetElement.innerHTML = marked(markdown);
-            })
-            .catch(error => {
-                console.error('Error fetching markdown file:', error);
-            });
+    function setActiveTab(selectedTab) {
+        tabs.forEach((tab) => {
+            tab.classList.remove("selected");
+            tab.querySelector(".tab-close").style.display = "none";
+        });
+
+        selectedTab.classList.add("selected");
+        const closeButton = selectedTab.querySelector(".tab-close");
+        closeButton.style.display = "inline";
+
+        closeButton.addEventListener("mouseover", function () {
+            closeButton.style.backgroundColor = "rgb(55, 61, 79)";
+            closeButton.style.borderRadius = "4px";
+            closeButton.style.padding = "2px";
+        });
+
+        closeButton.addEventListener("mouseleave", function () {
+            closeButton.style.backgroundColor = "transparent";
+        });
     }
 
-    // Load markdown content for blog and projects sections
-    loadMarkdown(blogMarkdownPath, 'markdown-content-blog');
-    loadMarkdown(projectMarkdownPath, 'markdown-content-project');
+    // Initially set the first tab as active
+    if (tabs.length > 0) {
+        setActiveTab(tabs[0]);
+    }
 });
+
+function navigateTo(page) {
+    window.location.href = page;
+}

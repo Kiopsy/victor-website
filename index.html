@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Website</title>
+    <title>Victor Goncalves</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code&display=swap" rel="stylesheet">
@@ -42,17 +42,37 @@
                 <div class="divider"></div>
                 <div class="content-area">
                     <header class="tab-header">
-                        <div class="tab selected">
-                            index.html <span class="tab-close">✕</span>
+                        <div class="tab" onclick="navigateTo('about.html')">
+                            <span class="tab-content">
+                                <span class="tab-filename">about.html</span>
+                                <span class="tab-close">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </span>
                         </div>
-                        <div class="tab">
-                            script.js <span class="tab-close">✕</span>
+                        <div class="tab" onclick="navigateTo('projects.html')">
+                            <span class="tab-content">
+                                <span class="tab-filename">projects.js</span>
+                                <span class="tab-close">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </span>
                         </div>
-                        <div class="tab">
-                            styles.css <span class="tab-close">✕</span>
+                        <div class="tab" onclick="navigateTo('photography.html')">
+                            <span class="tab-content">
+                                <span class="tab-filename">photography.jpg</span>
+                                <span class="tab-close">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </span>
                         </div>
-                        <div class="tab">
-                            louie.jpg <span class="tab-close">✕</span>
+                        <div class="tab" onclick="navigateTo('blog.html')">
+                            <span class="tab-content">
+                                <span class="tab-filename">blog.md</span>
+                                <span class="tab-close">
+                                    <i class="fas fa-times"></i>
+                                </span>
+                            </span>
                         </div>
                     </header>
                     <div class="editor-content">
@@ -80,6 +100,49 @@
         <footer>Victor Gonçalves 2024</footer>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
-    <script src="script.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tabs = document.querySelectorAll(".tab");
+            tabs.forEach((tab) => {
+                tab.addEventListener("click", function () {
+                    setActiveTab(tab);
+                });
+                tab.addEventListener("mouseover", function () {
+                    tab.querySelector(".tab-close").style.visibility = "visible";
+                });
+                tab.addEventListener("mouseleave", function () {
+                    if (!tab.classList.contains("selected")) {
+                        tab.querySelector(".tab-close").style.visibility = "hidden";
+                    }
+                });
+            });
+
+            function setActiveTab(selectedTab) {
+                tabs.forEach((tab) => {
+                    tab.classList.remove("selected");
+                    tab.querySelector(".tab-close").style.visibility = "hidden";
+                });
+
+                selectedTab.classList.add("selected");
+                const closeButton = selectedTab.querySelector(".tab-close");
+                closeButton.style.visibility = "visible";
+            }
+
+            // Initially set the first tab as active
+            if (tabs.length > 0) {
+                setActiveTab(tabs[0]);
+            }
+        });
+
+        function navigateTo(page) {
+            const content = {
+                'about.html': '<h1>About</h1><p>Welcome to the about page of Victor Goncalves.</p>',
+                'projects.html': '<h1>Projects</h1><p>Details about the projects I\'ve worked on.</p>',
+                'photography.html': '<h1>Photography</h1><p>Collection of my favorite photographs.</p>',
+                'blog.html': '<h1>Blog</h1><p>Posts on topics of interest.</p>'
+            };
+            document.querySelector("main").innerHTML = content[page] || '<h1>Not Found</h1><p>The content you are looking for does not exist.</p>';
+        }
+    </script>
 </body>
 </html>
